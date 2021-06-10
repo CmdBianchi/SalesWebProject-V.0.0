@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using SalesMebProject.Data;
 
 namespace SalesMebProject {
     public class Startup {
@@ -28,6 +30,9 @@ namespace SalesMebProject {
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+    services.AddDbContext<SalesMebProjectContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("SalesMebProjectContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
