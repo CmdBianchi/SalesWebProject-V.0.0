@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using SalesMebProject.Data;
+using SalesMebProject.Models;
 
 namespace SalesMebProject {
     public class Startup {
