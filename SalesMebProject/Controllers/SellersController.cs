@@ -1,8 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesMebProject.Services;
 namespace SalesMebProject.Controllers {
     public class SellersController : Controller {
+        private readonly SellerService _sellerService;
+        public SellersController(SellerService sellerService) {
+            _sellerService = sellerService;
+        }
         public IActionResult Index() {
-            return View();
+            var list = _sellerService.FindAll();
+            return View(list);
         }
     }
 }
