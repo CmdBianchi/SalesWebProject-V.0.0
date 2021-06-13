@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SalesMebProject.Models;
 using SalesMebProject.Services;
-
 namespace SalesMebProject.Controllers {
     public class SellersController : Controller {
         private readonly SellerService _sellerService;
