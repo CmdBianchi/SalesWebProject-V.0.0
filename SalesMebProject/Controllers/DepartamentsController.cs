@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SalesMebProject.Models;
-
 namespace SalesMebProject.Controllers {
     public class DepartamentsController : Controller {
         private readonly SalesMebProjectContext _context;
