@@ -3,7 +3,7 @@ using SalesMebProject.Models;
 using SalesMebProject.Services;
 using SalesMebProject.Models.ViewModels;
 using System.Collections.Generic;
-
+using SalesMebProject.Services.Execptions;
 namespace SalesMebProject.Controllers {
     public class SellersController : Controller {
         private readonly SellerService _sellerService;
@@ -66,7 +66,16 @@ namespace SalesMebProject.Controllers {
             if (id != seller.Id) {
                 return BadRequest();
             }
+            try { 
             _sellerService.Update(seller);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (KeyNotFoundException) {
+                return NotFound();
+            }
+            catch (DbCocurrencyException) {
+                return BadRequest();
+            }
         }
     }
 }
