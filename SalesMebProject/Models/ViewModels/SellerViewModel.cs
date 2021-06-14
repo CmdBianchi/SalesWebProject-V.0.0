@@ -6,5 +6,6 @@ namespace SalesMebProject.Models.ViewModels {
     public class SellerViewModel {
         public Seller Seller { get; set; }
         public ICollection<Departament> Departaments { get; set; }
+        public List<Departament> Departament { get; internal set; }
     }
 }

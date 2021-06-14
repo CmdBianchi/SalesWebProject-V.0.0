@@ -2,6 +2,8 @@
 using SalesMebProject.Models;
 using SalesMebProject.Services;
 using SalesMebProject.Models.ViewModels;
+using System.Collections.Generic;
+
 namespace SalesMebProject.Controllers {
     public class SellersController : Controller {
         private readonly SellerService _sellerService;
@@ -31,7 +33,7 @@ namespace SalesMebProject.Controllers {
                 return NotFound();
             }
             var obj = _sellerService.FindById(id.Value);
-            if(obj == null) {
+            if (obj == null) {
                 return NotFound();
             }
             return View(obj);
@@ -45,6 +47,26 @@ namespace SalesMebProject.Controllers {
                 return NotFound();
             }
             return View(obj);
+        }
+        public IActionResult Edit(int? id) {
+            if (id == null) {
+                return NotFound();
+            }
+            var obj = _sellerService.FindById(id.Value);
+            if (obj == null) {
+                return NotFound();
+            }
+            List<Departament> departments = _departmentService.FindAll();
+            SellerViewModel viewModel = new SellerViewModel { Seller = obj, Departament = departments };
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Seller seller) {
+            if (id != seller.Id) {
+                return BadRequest();
+            }
+            _sellerService.Update(seller);
         }
     }
 }

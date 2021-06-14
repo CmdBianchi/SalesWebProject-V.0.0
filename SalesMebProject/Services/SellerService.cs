@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SalesMebProject.Services;
+using SalesMebProject.Services.Execptions;
 namespace SalesMebProject.Services {
     public class SellerService {
         private readonly SalesMebProjectContext _context;
@@ -26,6 +28,18 @@ namespace SalesMebProject.Services {
             var obj = _context.Seller.Find(id);
             _context.Seller.Remove(obj);
             _context.SaveChanges();
+        }
+        public void Update(Seller obj) {
+            if(!_context.Seller.Any(x => x.Id == obj.Id)) {
+                throw new NotFoundException("Id not found");
+            }
+            try { 
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch(DbUpdateConcurrencyException e) {
+                throw new DbCocurrencyException(e.Message);
+            }
         }
     }
 }
