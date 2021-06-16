@@ -11,7 +11,7 @@ using SalesMebProject.Services;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using System.Collections.Generic;
-
+using SalesWebMvc.Services;
 namespace SalesMebProject {
     public class Startup {
         public Startup(IConfiguration configuration) {

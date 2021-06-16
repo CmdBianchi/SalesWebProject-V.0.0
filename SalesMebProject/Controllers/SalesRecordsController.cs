@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SalesMebProject.Services;
+using SalesWebMvc.Services;
 namespace SalesMebProject.Controllers {
     public class SalesRecordsController : Controller {
         private readonly SalesRecordService _salesRecordService;
