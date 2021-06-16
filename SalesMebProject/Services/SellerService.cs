@@ -25,9 +25,14 @@ namespace SalesMebProject.Services {
             return await _context.Seller.Include(obj => obj.Departament).FirstOrDefaultAsync(obj => obj.Id == id);
         }
         public async Task RemoveAsync(int id) {
+            try { 
             var obj = await _context.Seller.FindAsync(id);
             _context.Seller.Remove(obj);
             await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException e) {
+                throw new IntegrityException(e.Message);
+            }
         }
         public async Task UpdateAsync(Seller obj) {
             bool hasAny = await _context.Seller.AnyAsync(x => x.Id == obj.Id);

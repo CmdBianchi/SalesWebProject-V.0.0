@@ -36,6 +36,17 @@ namespace SalesMebProject.Controllers {
             await _sellerService.InsertAsync(seller);
             return RedirectToAction(nameof(Index));
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id) {
+            try { 
+            await _sellerService.RemoveAsync(id);
+            return RedirectToAction(nameof(Index));
+            }
+            catch(IntegrityException e) {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
+        }
         public async Task<IActionResult> Delete(int? id) {
             if (id == null) {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided" });
