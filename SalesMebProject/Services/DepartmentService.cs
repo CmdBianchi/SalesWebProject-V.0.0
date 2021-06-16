@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 namespace SalesMebProject.Services {
     public class DepartmentService {
         private readonly SalesMebProjectContext _context;
@@ -10,8 +11,8 @@ namespace SalesMebProject.Services {
             _context = context;
         }
 
-        public List<Departament> FindAll() {
-            return _context.Departament.OrderBy(x => x.Name).ToList();
+        public async Task<List<Departament>> FindAllAsync() {
+            return await _context.Departament.OrderBy(x => x.Name).ToListAsync();
         }
     }
 }
