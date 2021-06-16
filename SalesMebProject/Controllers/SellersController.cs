@@ -27,6 +27,11 @@ namespace SalesMebProject.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Seller seller) {
+            if (!ModelState.IsValid) {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerViewModel { Seller = seller, Departament = departments };
+                return View(viewModel);
+            }
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
@@ -51,6 +56,7 @@ namespace SalesMebProject.Controllers {
             return View(obj);
         }
         public IActionResult Edit(int? id) {
+
             if (id == null) {
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
@@ -65,6 +71,11 @@ namespace SalesMebProject.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Seller seller) {
+            if (!ModelState.IsValid) {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerViewModel { Seller = seller, Departament = departments };
+                return View(viewModel);
+            }
             if (id != seller.Id) {
                 return RedirectToAction(nameof(Error), new { message = "Id is mismatch" });
             }
